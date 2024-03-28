@@ -1,0 +1,16 @@
+@import './variables';
+
+.grid{
+    display: flex;
+    flex-direction: column;
+    gap: $square-gap;
+    &__row{
+        display: flex;
+        gap: $square-gap;
+        &__square{
+            border: 1px solid $square-color;
+            padding: 5px;
+        }
+    }
+
+}
