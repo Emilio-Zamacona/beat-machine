@@ -1,15 +1,15 @@
 import  GridSquare  from "./GridSquare/GridSquare"
+import { IRow } from "../../../types"
 
-interface IGridRow{
-    sound:string
-    beats:number
+interface IGridRow extends IRow{
+    onUpdateRow: (s:number)=>void
 }
 
-const GridRow  = ({sound, beats}:IGridRow)=>{
-    console.log('row', sound)
+const GridRow  = ({name,squares,onUpdateRow}:IGridRow)=>{
+
     return (
         <div className="grid__row">
-            {[...Array(beats)].map(() => <GridSquare/>)}
+            {squares.map((square,i) => <GridSquare key={i} square={square} onUpdateSquare={()=>{onUpdateRow(i)}}/>)}
         </div>
     )
 }

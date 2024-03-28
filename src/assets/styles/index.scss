@@ -8,8 +8,13 @@
         display: flex;
         gap: $square-gap;
         &__square{
-            border: 1px solid $square-color;
-            padding: 5px;
+            border: 1px solid $square-filled;
+            background-color: $square-empty;
+            width: 50px;
+            aspect-ratio: 1;
+            &--filled{
+             background-color: $square-filled;   
+            }
         }
     }
 

@@ -1,15 +1,19 @@
 import  GridRow  from "./GridRow/GridRow";
+import { IRow } from "../../types";
 
-interface IGrid{
-    sounds:string[]
-    beats: number
+interface IRows {
+    rows:IRow[]
+    onUpdateGrid: (rowIndex:number,squareIndex:number)=>void
 }
 
-const Grid = ({sounds,beats}:IGrid)=>{
-    console.log('test')
+const Grid = ({rows,onUpdateGrid}:IRows)=>{
+
+    const onUpdateRow = (rowIndex:number,squareIndex:number)=>{
+        onUpdateGrid(rowIndex,squareIndex)
+    }
     return(
         <div className="grid">
-            {sounds.map(sound=><GridRow sound={sound} beats={beats}/>)}
+            {rows.map((row,i)=><GridRow key={i} name={row.name} squares={row.squares} onUpdateRow={(s)=>{onUpdateRow(i,s)}}/>)}
         </div>
     )
 }
