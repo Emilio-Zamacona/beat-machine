@@ -48,9 +48,14 @@ function App() {
     beats: 16,
     sounds: null,
   });
-  const goToNextBeat = () => {
-    beatDispatch({ type: "SOUNDS" });
-    beatDispatch({ type: "BEAT" });
+  const goToNextBeat = (time?: number) => {
+    clearInterval(track);
+    setTrack(
+      setInterval(() => {
+        beatDispatch({ type: "SOUNDS" });
+        beatDispatch({ type: "BEAT" });
+      }, time || beatState.time)
+    );
   };
 
   const clearGrid = () => {
@@ -85,14 +90,14 @@ function App() {
     console.warn(beatState.time);
     if (track && play) {
       console.warn("changing time");
+      goToNextBeat(Math.round(time));
       clearInterval(track);
-      setTrack(setInterval(goToNextBeat, Math.round(time)));
     }
   };
 
   const start = () => {
     if (!track && play) {
-      setTrack(setInterval(goToNextBeat, beatState.time));
+      goToNextBeat();
     } else if (!play) {
       clearInterval(track);
       setTrack(null);
