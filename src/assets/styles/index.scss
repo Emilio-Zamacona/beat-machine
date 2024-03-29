@@ -7,6 +7,9 @@
     &__row{
         display: flex;
         gap: $square-gap;
+        &__label{
+            width: 50px;
+        }
         &__square{
             border: 1px solid $square-filled;
             background-color: $square-empty;
