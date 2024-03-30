@@ -13,15 +13,20 @@ const GridSquare = ({ square, current, onUpdateSquare }: IGridSquare) => {
   useGSAP(
     () => {
       if (square && current) {
-        gsap
-          .timeline()
-          .to(squareRef.current, {
-            scale: 1.4,
-            backgroundColor: "#aa3356",
-            borderRadius: "50%",
-            duration: 0.9,
-          })
-          .reverse(6);
+        const tl = gsap.timeline().to(squareRef.current, {
+          scale: 1.4,
+          backgroundColor: "#aa3356",
+          borderRadius: "50%",
+          boxShadow: "0px 0px 10px black",
+          duration: 0.3,
+          delay: 0.3,
+          onComplete: () => {
+            tl.reverse();
+          },
+          onReverseComplete: () => {
+            gsap.set(squareRef.current, { clearProps: "all" });
+          },
+        });
       }
     },
     { scope: squareRef, dependencies: [square, current] }

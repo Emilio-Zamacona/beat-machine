@@ -5,16 +5,22 @@ interface ISounds {
   trigger: number[];
 }
 const Sounds = ({ sounds, trigger }: ISounds) => {
-  const audioRefs = useRef<any>(sounds.map(() => createRef()));
+  const audioRefs = useRef<any>(null);
+  if (!audioRefs.current) {
+    audioRefs.current = sounds.map(
+      (sound) => new Audio(`src/assets/sounds/${sound}.mp3`)
+    );
+    console.log(audioRefs);
+  }
   const test = (i: number) => {
-    audioRefs.current[i].current.play();
+    audioRefs.current[i].play();
   };
   const triggerSounds = () => {
     if (!audioRefs.current || !trigger) return;
     audioRefs.current.map((sound, i) => {
       if (trigger[i]) {
-        sound.current.load();
-        sound.current.play();
+        sound.load();
+        sound.play();
       }
     });
   };
@@ -31,11 +37,6 @@ const Sounds = ({ sounds, trigger }: ISounds) => {
           key={sound}
         >
           <p>{sound}</p>
-          <audio
-            ref={audioRefs.current[i]}
-            key={sound}
-            src={`src/assets/sounds/${sound}.mp3`}
-          ></audio>
         </button>
       ))}
     </>
