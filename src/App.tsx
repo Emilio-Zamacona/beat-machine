@@ -3,6 +3,7 @@ import Grid from "./components/Grid/Grid";
 import { IRow } from "./types";
 import Sounds from "./components/Sounds/Sounds";
 import BpmInput from "./components/BpmInput/BpmInput";
+import BeatInput from "./components/BeatInput/BeatInput";
 
 function App() {
   const [sounds, setSounds] = useState([
@@ -15,13 +16,13 @@ function App() {
     "rim",
     "snap",
   ]);
-  const [rows, setRows] = useState<IRow[]>(null);
+  const [rows, setRows] = useState<IRow[]>();
   const [play, setPlay] = useState(false);
-  const [track, setTrack] = useState(null);
+  const [track, setTrack] = useState<number | undefined>(0);
 
   const beatReducer = (state, action) => {
     switch (action.type) {
-      case "BEAT": {
+      case "CURRENT": {
         return {
           ...state,
           current: state.beats - 1 > state.current ? state.current + 1 : 0,
@@ -30,13 +31,19 @@ function App() {
       case "SOUNDS": {
         return {
           ...state,
-          sounds: rows.map((row) => row.squares[state.current]),
+          sounds: rows && rows.map((row) => row.squares[state.current]),
         };
       }
       case "TIME": {
         return {
           ...state,
           time: action.value,
+        };
+      }
+      case "BEATS": {
+        return {
+          ...state,
+          beats: action.value,
         };
       }
     }
@@ -53,7 +60,7 @@ function App() {
     setTrack(
       setInterval(() => {
         beatDispatch({ type: "SOUNDS" });
-        beatDispatch({ type: "BEAT" });
+        beatDispatch({ type: "CURRENT" });
       }, time || beatState.time)
     );
   };
@@ -84,7 +91,7 @@ function App() {
       return newRows;
     });
   };
-  const timeChange = (time: number) => {
+  const updateTime = (time: number) => {
     console.log(Math.round(time));
     beatDispatch({ type: "TIME", value: Math.round(time) });
     console.warn(beatState.time);
@@ -94,13 +101,32 @@ function App() {
       clearInterval(track);
     }
   };
+  const updateBeats = (qty: number) => {
+    beatDispatch({ type: "BEATS", value: qty });
+    setRows(
+      rows?.map((row) => {
+        if (row.squares.length > qty) {
+          return {
+            ...row,
+            squares: row.squares.splice(0, qty),
+          };
+        } else if (row.squares.length < qty) {
+          return {
+            ...row,
+            squares: row.squares.concat([...Array(qty)].map(() => 0)),
+          };
+        }
+        return row;
+      })
+    );
+  };
 
   const start = () => {
     if (!track && play) {
       goToNextBeat();
     } else if (!play) {
       clearInterval(track);
-      setTrack(null);
+      setTrack(0);
     }
   };
   useEffect(() => {
@@ -118,7 +144,8 @@ function App() {
         </button>
         <button onClick={clearGrid}>clear grid</button>
       </div>
-      <BpmInput onTimeChange={timeChange}></BpmInput>
+      <BeatInput changeBeatQty={updateBeats}></BeatInput>
+      <BpmInput onTimeChange={updateTime}></BpmInput>
       <Sounds sounds={sounds} trigger={beatState.sounds}></Sounds>
       {rows && <Grid rows={rows} onUpdateGrid={updateGrid} />}
     </>
