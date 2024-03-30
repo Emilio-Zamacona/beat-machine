@@ -147,7 +147,13 @@ function App() {
       <BeatInput changeBeatQty={updateBeats}></BeatInput>
       <BpmInput onTimeChange={updateTime}></BpmInput>
       <Sounds sounds={sounds} trigger={beatState.sounds}></Sounds>
-      {rows && <Grid rows={rows} onUpdateGrid={updateGrid} />}
+      {rows && (
+        <Grid
+          rows={rows}
+          onUpdateGrid={updateGrid}
+          current={beatState.current}
+        />
+      )}
     </>
   );
 }

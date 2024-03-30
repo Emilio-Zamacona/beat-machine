@@ -2,10 +2,11 @@ import GridSquare from "./GridSquare/GridSquare";
 import { IRow } from "../../../types";
 
 interface IGridRow extends IRow {
+  current: number;
   onUpdateRow: (s: number) => void;
 }
 
-const GridRow = ({ name, squares, onUpdateRow }: IGridRow) => {
+const GridRow = ({ name, squares, current, onUpdateRow }: IGridRow) => {
   return (
     <div className="grid__row">
       <div className="grid__row__label">{name}</div>
@@ -13,6 +14,7 @@ const GridRow = ({ name, squares, onUpdateRow }: IGridRow) => {
         <GridSquare
           key={i}
           square={square}
+          current={current === i}
           onUpdateSquare={() => {
             onUpdateRow(i);
           }}
