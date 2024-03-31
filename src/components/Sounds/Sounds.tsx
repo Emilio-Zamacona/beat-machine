@@ -1,14 +1,15 @@
 import { RefObject, createRef, useEffect, useRef } from "react";
+import { ITheme } from "../../types";
 
 interface ISounds {
-  sounds: string[];
   trigger: number[];
+  theme: ITheme;
 }
-const Sounds = ({ sounds, trigger }: ISounds) => {
+const Sounds = ({ theme, trigger }: ISounds) => {
   const audioRefs = useRef<any>(null);
   if (!audioRefs.current) {
-    audioRefs.current = sounds.map(
-      (sound) => new Audio(`src/assets/sounds/${sound}.mp3`)
+    audioRefs.current = theme.sounds.map(
+      (sound) => new Audio(`src/assets/sounds/${theme.name}/${sound}.mp3`)
     );
     console.log(audioRefs);
   }
@@ -29,7 +30,7 @@ const Sounds = ({ sounds, trigger }: ISounds) => {
   }, [trigger]);
   return (
     <>
-      {sounds.map((sound, i) => (
+      {theme.sounds.map((sound, i) => (
         <button
           onClick={() => {
             test(i);

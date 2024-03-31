@@ -4,21 +4,35 @@ import { IRow } from "./types";
 import Sounds from "./components/Sounds/Sounds";
 import BpmInput from "./components/BpmInput/BpmInput";
 import BeatInput from "./components/BeatInput/BeatInput";
+import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
+import { themes } from "./constants/config";
 
 function App() {
-  const [sounds, setSounds] = useState([
-    "bongo",
-    "clack",
-    "hh",
-    "kick",
-    "kick2",
-    "pot",
-    "rim",
-    "snap",
-  ]);
   const [rows, setRows] = useState<IRow[]>();
   const [play, setPlay] = useState(false);
   const [track, setTrack] = useState<number | undefined>(0);
+
+  const themeReducer = (state, action) => {
+    switch (action.type) {
+      case "SWITCH": {
+        return {
+          ...state,
+          name: themes[action.value].name,
+          sounds: themes[action.value].sounds,
+          colors: themes[action.value].colors,
+        };
+      }
+    }
+  };
+
+  const [themeState, themeDispatch] = useReducer(themeReducer, {
+    name: themes[0].name,
+    sounds: themes[0].sounds,
+    colors: themes[0].colors,
+  });
+  const themeUpdate = (index: number) => {
+    themeDispatch({ type: "SWITCH", value: index });
+  };
 
   const beatReducer = (state, action) => {
     switch (action.type) {
@@ -67,7 +81,7 @@ function App() {
 
   const clearGrid = () => {
     setRows(
-      sounds.map((sound) => {
+      themeState.sounds.map((sound: string) => {
         return {
           name: sound,
           squares: [...Array(beatState.beats)].map(() => 0),
@@ -77,9 +91,9 @@ function App() {
   };
 
   useEffect(() => {
-    if (!beatState.beats || !sounds || rows) return;
+    if (!beatState.beats || !themeState.sounds || rows) return;
     clearGrid();
-  }, [beatState.beats, sounds, rows]);
+  }, [beatState.beats, themeState.sounds, rows]);
 
   const updateGrid = (rowIndex: number, squareIndex: number) => {
     console.warn(rowIndex, squareIndex);
@@ -132,6 +146,11 @@ function App() {
   useEffect(() => {
     start();
   }, [play]);
+
+  useEffect(() => {
+    console.warn(themeState);
+    clearGrid();
+  }, [themeState]);
   return (
     <>
       <div>
@@ -144,9 +163,10 @@ function App() {
         </button>
         <button onClick={clearGrid}>clear grid</button>
       </div>
+      <ThemeSwitcher onChangeTheme={themeUpdate}></ThemeSwitcher>
       <BeatInput changeBeatQty={updateBeats}></BeatInput>
       <BpmInput onTimeChange={updateTime}></BpmInput>
-      <Sounds sounds={sounds} trigger={beatState.sounds}></Sounds>
+      <Sounds theme={themeState} trigger={beatState.sounds}></Sounds>
       {rows && (
         <Grid
           rows={rows}
