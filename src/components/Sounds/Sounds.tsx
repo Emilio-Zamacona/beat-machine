@@ -1,11 +1,10 @@
-import { RefObject, createRef, useEffect, useRef } from "react";
-import { ITheme } from "../../types";
+import { useContext, useEffect, useRef } from "react";
+import { StoreContext } from "../../store/context";
 
-interface ISounds {
-  trigger: number[];
-  theme: ITheme;
-}
-const Sounds = ({ theme, trigger }: ISounds) => {
+const Sounds = () => {
+  const { store } = useContext(StoreContext);
+  const trigger = store.sounds;
+  const theme = store.theme;
   const audioRefs = useRef<any>(null);
   if (!audioRefs.current) {
     audioRefs.current = theme.sounds.map(
@@ -17,6 +16,7 @@ const Sounds = ({ theme, trigger }: ISounds) => {
     audioRefs.current[i].play();
   };
   const triggerSounds = () => {
+    console.warn(trigger);
     if (!audioRefs.current || !trigger) return;
     audioRefs.current.map((sound, i) => {
       if (trigger[i]) {
