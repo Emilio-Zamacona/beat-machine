@@ -1,28 +1,3 @@
 @import './variables';
-
-.grid{
-    display: flex;
-    flex-direction: column;
-    gap: $square-gap;
-    &__row{
-        display: flex;
-        gap: $square-gap;
-        &__label{
-            width: 50px;
-        }
-        &__square{
-            border: 1px solid $border;
-            background-color: $empty;
-            width: 70px;
-            aspect-ratio: 1;
-            &.--filled{
-             background-color: $filled;   
-            }
-            &.--current{
-                border-left: 3px solid $progress;
-                border-right: 3px solid $progress;
-            }
-        }
-    }
-
-}
+@import './grid.scss';
+@import './header.scss';

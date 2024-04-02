@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import Grid from "./components/Grid/Grid";
 import Sounds from "./components/Sounds/Sounds";
-import BpmInput from "./components/BpmInput/BpmInput";
-import BeatInput from "./components/BeatInput/BeatInput";
-import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
 import { useStore } from "./store/hooks";
+import Header from "./components/Header/Header";
 
 function App() {
   const [track, setTrack] = useState<number | undefined>(0);
@@ -26,10 +24,6 @@ function App() {
     );
   };
 
-  const clearGrid = () => {
-    dispatch({ type: "RESETGRID" });
-  };
-
   const start = () => {
     if (!track && play) {
       goToNextBeat();
@@ -49,23 +43,11 @@ function App() {
   }, [time]);
 
   useEffect(() => {
-    clearGrid();
+    dispatch({ type: "RESETGRID" });
   }, []);
   return (
     <>
-      <div>
-        <button
-          onClick={() => {
-            dispatch({ type: "PLAY", value: !play });
-          }}
-        >
-          play
-        </button>
-        <button onClick={clearGrid}>clear grid</button>
-      </div>
-      <ThemeSwitcher />
-      <BeatInput />
-      <BpmInput />
+      <Header />
       <Sounds />
       {rows && <Grid />}
     </>

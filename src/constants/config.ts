@@ -2,27 +2,7 @@ export const minBpm = 50;
 export const maxBpm = 200;
 export const themes = [
   {
-    name: "normal",
-    sounds: [
-      { name: "bongo", color: "red" },
-      { name: "clack", color: "blue" },
-      { name: "hh", color: "yellow" },
-      { name: "kick", color: "green" },
-      { name: "kick2", color: "violet" },
-      { name: "pot", color: "black" },
-      { name: "rim", color: "pink" },
-      { name: "snap", color: false },
-    ],
-    colors: [
-      { name: "filled", value: "#220a78" },
-      { name: "empty", value: "#ffffff" },
-      { name: "border", value: "#220a78" },
-      { name: "background", value: "#ffffff" },
-      { name: "progress", value: "#0000ff" },
-    ],
-  },
-  {
-    name: "other",
+    name: "digital",
     sounds: [
       { name: "clap", color: "red" },
       { name: "clave", color: "blue" },
@@ -56,11 +36,32 @@ export const themes = [
       { name: "snap", color: "pink" },
     ],
     colors: [
-      { name: "filled", value: "#22ff78" },
-      { name: "empty", value: "#000000" },
-      { name: "border", value: "#22ff78" },
+      { name: "filled", value: "#F5CB5C" },
+      { name: "empty", value: "#333533" },
+      { name: "border", value: "#F5CB5C" },
       { name: "background", value: "#ffffff" },
-      { name: "progress", value: "#ff00ff" },
+      { name: "progress", value: "#E8EDDF" },
+    ],
+  },
+  {
+    name: "wood",
+    sounds: [
+      { name: "bells", color: "yellow" },
+      { name: "block", color: "yellow" },
+      { name: "bongo", color: "yellow" },
+      { name: "click", color: "yellow" },
+      { name: "drum1", color: "orange" },
+      { name: "drum2", color: "orange" },
+      { name: "knock", color: "blue" },
+      { name: "shaker", color: "red" },
+      { name: "shaker2", color: "red" },
+    ],
+    colors: [
+      { name: "filled", value: "#093824" },
+      { name: "empty", value: "#C6CCB2" },
+      { name: "border", value: "#093824" },
+      { name: "background", value: "#ffffff" },
+      { name: "progress", value: "#BF4E30" },
     ],
   },
 ];
