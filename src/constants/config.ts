@@ -40,4 +40,27 @@ export const themes = [
       { name: "progress", value: "#ff00ff" },
     ],
   },
+  {
+    name: "acoustic",
+    sounds: [
+      { name: "hat1", color: "yellow" },
+      { name: "hat2", color: "yellow" },
+      { name: "hat3", color: "yellow" },
+      { name: "hatopen", color: "yellow" },
+      { name: "crash", color: "orange" },
+      { name: "splash", color: "orange" },
+      { name: "kick", color: "blue" },
+      { name: "rimshot", color: "red" },
+      { name: "snare", color: "red" },
+      { name: "tambourine", color: "#dd00000" },
+      { name: "snap", color: "pink" },
+    ],
+    colors: [
+      { name: "filled", value: "#22ff78" },
+      { name: "empty", value: "#000000" },
+      { name: "border", value: "#22ff78" },
+      { name: "background", value: "#ffffff" },
+      { name: "progress", value: "#ff00ff" },
+    ],
+  },
 ];
