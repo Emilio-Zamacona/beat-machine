@@ -12,10 +12,6 @@ function App() {
   const { store, dispatch } = useStore();
   const { rows, play, time } = store;
 
-  const themeUpdate = (index: number) => {
-    dispatch({ type: "THEME", value: index });
-  };
-
   const goToNextBeat = () => {
     if (!play) {
       clearInterval(track);
@@ -24,26 +20,14 @@ function App() {
     }
     clearInterval(track);
     setTrack(
-      setTimeout(() => {
+      setInterval(() => {
         dispatch({ type: "CURRENT" });
-        goToNextBeat();
       }, time)
     );
   };
 
   const clearGrid = () => {
     dispatch({ type: "RESETGRID" });
-  };
-
-  const updateTime = (newTime: number) => {
-    dispatch({ type: "TIME", value: Math.round(newTime) });
-    if (track && play) {
-      goToNextBeat();
-      clearInterval(track);
-    }
-  };
-  const updateBeats = (qty: number) => {
-    dispatch({ type: "BEATS", value: qty });
   };
 
   const start = () => {
@@ -59,8 +43,13 @@ function App() {
   }, [play]);
 
   useEffect(() => {
+    clearInterval(track);
+    setTrack(0);
+    goToNextBeat();
+  }, [time]);
+
+  useEffect(() => {
     clearGrid();
-    console.warn(store);
   }, []);
   return (
     <>
@@ -74,9 +63,9 @@ function App() {
         </button>
         <button onClick={clearGrid}>clear grid</button>
       </div>
-      <ThemeSwitcher onChangeTheme={themeUpdate}></ThemeSwitcher>
-      <BeatInput changeBeatQty={updateBeats}></BeatInput>
-      <BpmInput onTimeChange={updateTime}></BpmInput>
+      <ThemeSwitcher />
+      <BeatInput />
+      <BpmInput />
       <Sounds />
       {rows && <Grid />}
     </>

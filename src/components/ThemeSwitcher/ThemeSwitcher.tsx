@@ -1,15 +1,15 @@
 import { themes } from "../../constants/config";
-interface IThemeSwitcher {
-  onChangeTheme: (index: number) => void;
-}
-const ThemeSwitcher = ({ onChangeTheme }: IThemeSwitcher) => {
+import { useStore } from "../../store/hooks";
+
+const ThemeSwitcher = () => {
+  const { dispatch } = useStore();
   return (
     <div className="theme-switcher">
       {themes.map((theme, i) => (
         <button
           key={theme.name}
           onClick={() => {
-            onChangeTheme(i);
+            dispatch({ type: "THEME", value: i });
           }}
         >
           {theme.name}

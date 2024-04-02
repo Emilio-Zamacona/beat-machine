@@ -1,9 +1,9 @@
-interface IBeatInput {
-  changeBeatQty: (qty: number) => void;
-}
-const BeatInput = ({ changeBeatQty }: IBeatInput) => {
+import { useStore } from "../../store/hooks";
+
+const BeatInput = () => {
+  const { dispatch } = useStore();
   const onChangeBeatQty = (e: React.ChangeEvent<HTMLInputElement>) => {
-    changeBeatQty(Number(e.target.value));
+    dispatch({ type: "BEATS", value: e.target.value });
   };
   return <input onChange={onChangeBeatQty} type="number" />;
 };

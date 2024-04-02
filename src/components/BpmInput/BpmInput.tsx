@@ -1,11 +1,13 @@
 import { minBpm, maxBpm } from "../../constants/config";
+import { useStore } from "../../store/hooks";
 
-interface IBpmInput {
-  onTimeChange: (time: number) => void;
-}
-const BpmInput = ({ onTimeChange }: IBpmInput) => {
+const BpmInput = () => {
+  const { dispatch } = useStore();
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onTimeChange(15000 / Number(e.target.value));
+    dispatch({
+      type: "TIME",
+      value: Math.round(15000 / Number(e.target.value)),
+    });
   };
   return (
     <input onChange={onInputChange} type="range" min={minBpm} max={maxBpm} />
