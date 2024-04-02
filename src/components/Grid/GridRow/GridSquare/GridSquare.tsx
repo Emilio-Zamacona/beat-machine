@@ -28,7 +28,7 @@ const GridSquare = ({
         const tl = gsap.timeline().to(squareRef.current, {
           scale: 1.4,
           backgroundColor:
-            theme.sounds[rowIndex].color || theme.colors.squareActive,
+            theme.sounds[rowIndex].color || theme.colors[0].value,
           borderRadius: "50%",
           boxShadow: "0px 0px 10px black",
           duration: 0.3,

@@ -6,11 +6,13 @@ export interface IRow {
 export interface ITheme {
   name: string;
   sounds: ISound[];
-  colors: {
-    squareActive: string;
-  };
+  colors: IColor[];
 }
 export interface ISound {
   name: string;
   color: string | boolean;
+}
+export interface IColor {
+  name: string;
+  value: string;
 }

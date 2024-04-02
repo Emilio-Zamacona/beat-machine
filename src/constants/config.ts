@@ -13,9 +13,13 @@ export const themes = [
       { name: "rim", color: "pink" },
       { name: "snap", color: false },
     ],
-    colors: {
-      squareActive: "blue",
-    },
+    colors: [
+      { name: "filled", value: "#220a78" },
+      { name: "empty", value: "#ffffff" },
+      { name: "border", value: "#220a78" },
+      { name: "background", value: "#ffffff" },
+      { name: "progress", value: "#0000ff" },
+    ],
   },
   {
     name: "other",
@@ -28,8 +32,12 @@ export const themes = [
       { name: "snare", color: "brown" },
       { name: "wood", color: "pink" },
     ],
-    colors: {
-      squareActive: "red",
-    },
+    colors: [
+      { name: "filled", value: "#22ff78" },
+      { name: "empty", value: "#000000" },
+      { name: "border", value: "#22ff78" },
+      { name: "background", value: "#ffffff" },
+      { name: "progress", value: "#ff00ff" },
+    ],
   },
 ];

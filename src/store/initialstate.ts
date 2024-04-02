@@ -15,7 +15,7 @@ const initialState = {
     (sound: { name: string; color: string | boolean }) => {
       return {
         name: sound.name,
-        color: sound.color || themes[0].colors.squareActive,
+        color: sound.color || themes[0].colors[0].value,
         squares: [...Array(beats)].map(() => 0),
       };
     }
