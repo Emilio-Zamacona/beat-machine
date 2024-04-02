@@ -9,8 +9,8 @@ const StoreContext = createContext<{
 }>({ store: initialState, dispatch: () => null });
 
 const storeReducer = (state, action) => {
-  const resetGrid = () => {
-    return state.theme.sounds.map((sound: string) => {
+  const resetGrid = (sounds: string[]) => {
+    return sounds.map((sound: string) => {
       return {
         name: sound,
         squares: [...Array(state.beats)].map(() => 0),
@@ -67,13 +67,15 @@ const storeReducer = (state, action) => {
           sounds: themes[action.value].sounds,
           colors: themes[action.value].colors,
         },
-        rows: resetGrid(),
+        rows: resetGrid(themes[action.value].sounds),
+        play: false,
+        current: -1,
       };
     }
     case "RESETGRID": {
       return {
         ...state,
-        rows: resetGrid(),
+        rows: resetGrid(state.theme.sounds),
       };
     }
     case "UPDATEGRID": {
@@ -89,6 +91,7 @@ const storeReducer = (state, action) => {
       return {
         ...state,
         play: action.value,
+        current: -1,
       };
     }
   }

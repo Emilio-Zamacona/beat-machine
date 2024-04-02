@@ -4,6 +4,7 @@ import { useStore } from "../../store/hooks";
 
 const Grid = () => {
   const { store, dispatch } = useStore();
+  const { rows } = store;
   const onUpdateRow = (rowIndex: number, squareIndex: number) => {
     dispatch({
       type: "UPDATEGRID",
@@ -12,7 +13,7 @@ const Grid = () => {
   };
   return (
     <div className="grid">
-      {store.rows.map((row: IRow, i: number) => (
+      {rows.map((row: IRow, i: number) => (
         <GridRow
           key={i}
           name={row.name}
