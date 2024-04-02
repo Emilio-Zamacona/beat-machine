@@ -5,8 +5,12 @@ export interface IRow {
 
 export interface ITheme {
   name: string;
-  sounds: string[];
+  sounds: ISound[];
   colors: {
     squareActive: string;
   };
+}
+export interface ISound {
+  name: string;
+  color: string | boolean;
 }

@@ -1,7 +1,7 @@
-import { createContext, useReducer, Dispatch } from "react";
+import { createContext, useReducer } from "react";
 import { themes } from "../constants/config";
 import initialState from "./initialstate";
-import { IRow } from "../types";
+import { IRow, ISound } from "../types";
 
 const StoreContext = createContext<{
   store: any;
@@ -9,10 +9,10 @@ const StoreContext = createContext<{
 }>({ store: initialState, dispatch: () => null });
 
 const storeReducer = (state, action) => {
-  const resetGrid = (sounds: string[]) => {
-    return sounds.map((sound: string) => {
+  const resetGrid = (sounds: ISound[]) => {
+    return sounds.map((sound: ISound) => {
       return {
-        name: sound,
+        name: sound.name,
         squares: [...Array(state.beats)].map(() => 0),
       };
     });

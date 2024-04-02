@@ -1,21 +1,34 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useStore } from "../../../../store/hooks";
 
 interface IGridSquare {
   square: number;
-  current: boolean;
+  rowIndex: number;
+  squareIndex: number;
   onUpdateSquare: () => void;
 }
 
-const GridSquare = ({ square, current, onUpdateSquare }: IGridSquare) => {
+const GridSquare = ({
+  square,
+  rowIndex,
+  squareIndex,
+  onUpdateSquare,
+}: IGridSquare) => {
   const squareRef = useRef<HTMLButtonElement>(null);
+  const { store } = useStore();
+  const { theme, current } = store;
+  const isCurrent = () => {
+    return current === squareIndex;
+  };
   useGSAP(
     () => {
-      if (square && current) {
+      if (square && isCurrent()) {
         const tl = gsap.timeline().to(squareRef.current, {
           scale: 1.4,
-          backgroundColor: "#aa3356",
+          backgroundColor:
+            theme.sounds[rowIndex].color || theme.colors.squareActive,
           borderRadius: "50%",
           boxShadow: "0px 0px 10px black",
           duration: 0.3,
@@ -28,13 +41,13 @@ const GridSquare = ({ square, current, onUpdateSquare }: IGridSquare) => {
         });
       }
     },
-    { scope: squareRef, dependencies: [square, current] }
+    { scope: squareRef, dependencies: [square, isCurrent()] }
   );
   return (
     <button
       ref={squareRef}
       className={`grid__row__square ${square && "--filled"} ${
-        current && "--current"
+        isCurrent() && "--current"
       }`}
       onMouseDown={onUpdateSquare}
     ></button>

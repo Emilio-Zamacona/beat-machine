@@ -11,11 +11,14 @@ const initialState = {
   time: 175,
   beats: beats,
   sounds: null,
-  rows: themes[0].sounds.map((sound: string) => {
-    return {
-      name: sound,
-      squares: [...Array(beats)].map(() => 0),
-    };
-  }),
+  rows: themes[0].sounds.map(
+    (sound: { name: string; color: string | boolean }) => {
+      return {
+        name: sound.name,
+        color: sound.color || themes[0].colors.squareActive,
+        squares: [...Array(beats)].map(() => 0),
+      };
+    }
+  ),
 };
 export default initialState;

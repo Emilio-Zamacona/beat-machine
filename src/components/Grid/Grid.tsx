@@ -15,6 +15,7 @@ const Grid = () => {
     <div className="grid">
       {rows.map((row: IRow, i: number) => (
         <GridRow
+          rowIndex={i}
           key={i}
           name={row.name}
           squares={row.squares}
