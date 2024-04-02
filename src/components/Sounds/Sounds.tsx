@@ -1,25 +1,29 @@
-import { useContext, useEffect, useRef } from "react";
-import { StoreContext } from "../../store/context";
+import { useEffect, useRef } from "react";
+import { IRow } from "../../types";
+import { useStore } from "../../store/hooks";
 
 const Sounds = () => {
-  const { store } = useContext(StoreContext);
-  const trigger = store.sounds;
-  const theme = store.theme;
+  const {
+    store: { theme, current, rows },
+  } = useStore();
   const audioRefs = useRef<any>(null);
   if (!audioRefs.current) {
     audioRefs.current = theme.sounds.map(
-      (sound) => new Audio(`src/assets/sounds/${theme.name}/${sound}.mp3`)
+      (sound: string) =>
+        new Audio(`src/assets/sounds/${theme.name}/${sound}.mp3`)
     );
     console.log(audioRefs);
   }
   const test = (i: number) => {
     audioRefs.current[i].play();
   };
+  const currentSounds = () => {
+    return rows.map((row: IRow) => row.squares[current]);
+  };
   const triggerSounds = () => {
-    console.warn(trigger);
-    if (!audioRefs.current || !trigger) return;
-    audioRefs.current.map((sound, i) => {
-      if (trigger[i]) {
+    if (!audioRefs.current) return;
+    audioRefs.current.map((sound: HTMLAudioElement, i: number) => {
+      if (currentSounds()[i]) {
         sound.load();
         sound.play();
       }
@@ -27,10 +31,10 @@ const Sounds = () => {
   };
   useEffect(() => {
     triggerSounds();
-  }, [trigger]);
+  }, [current]);
   return (
     <>
-      {theme.sounds.map((sound, i) => (
+      {theme.sounds.map((sound: string, i: number) => (
         <button
           onClick={() => {
             test(i);

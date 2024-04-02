@@ -1,12 +1,14 @@
 import GridSquare from "./GridSquare/GridSquare";
 import { IRow } from "../../../types";
+import { useStore } from "../../../store/hooks";
 
 interface IGridRow extends IRow {
-  current: number;
   onUpdateRow: (s: number) => void;
 }
 
-const GridRow = ({ name, squares, current, onUpdateRow }: IGridRow) => {
+const GridRow = ({ name, squares, onUpdateRow }: IGridRow) => {
+  const { store } = useStore();
+
   return (
     <div className="grid__row">
       <div className="grid__row__label">{name}</div>
@@ -14,7 +16,7 @@ const GridRow = ({ name, squares, current, onUpdateRow }: IGridRow) => {
         <GridSquare
           key={i}
           square={square}
-          current={current === i}
+          current={store.current === i}
           onUpdateSquare={() => {
             onUpdateRow(i);
           }}

@@ -19,7 +19,6 @@ const GridSquare = ({ square, current, onUpdateSquare }: IGridSquare) => {
           borderRadius: "50%",
           boxShadow: "0px 0px 10px black",
           duration: 0.3,
-          delay: 0.3,
           onComplete: () => {
             tl.reverse();
           },

@@ -1,24 +1,22 @@
 import GridRow from "./GridRow/GridRow";
 import { IRow } from "../../types";
+import { useStore } from "../../store/hooks";
 
-interface IRows {
-  rows: IRow[];
-  current: number;
-  onUpdateGrid: (rowIndex: number, squareIndex: number) => void;
-}
-
-const Grid = ({ rows, current, onUpdateGrid }: IRows) => {
+const Grid = () => {
+  const { store, dispatch } = useStore();
   const onUpdateRow = (rowIndex: number, squareIndex: number) => {
-    onUpdateGrid(rowIndex, squareIndex);
+    dispatch({
+      type: "UPDATEGRID",
+      value: { row: rowIndex, square: squareIndex },
+    });
   };
   return (
     <div className="grid">
-      {rows.map((row, i) => (
+      {store.rows.map((row: IRow, i: number) => (
         <GridRow
           key={i}
           name={row.name}
           squares={row.squares}
-          current={current}
           onUpdateRow={(s) => {
             onUpdateRow(i, s);
           }}
