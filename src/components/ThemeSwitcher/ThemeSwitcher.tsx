@@ -18,16 +18,22 @@ const ThemeSwitcher = () => {
   }, [theme]);
   return (
     <div className="theme-switcher">
-      {themes.map((theme, i) => (
-        <button
-          key={theme.name}
-          onClick={() => {
-            dispatch({ type: "THEME", value: i });
-          }}
-        >
-          {theme.name}
-        </button>
-      ))}
+      <div>
+        <span>THEMES</span>
+      </div>
+      <ul className="theme-switcher__list">
+        {themes.map((theme, i) => (
+          <li key={theme.name}>
+            <button
+              onClick={() => {
+                dispatch({ type: "THEME", value: i });
+              }}
+            >
+              {theme.name}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

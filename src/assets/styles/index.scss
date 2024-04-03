@@ -1,3 +1,12 @@
 @import './variables';
+@import './bpmInput.scss';
 @import './grid.scss';
 @import './header.scss';
+
+body{
+    background-color: $background;
+}
+ul{
+    list-style: none;
+    padding: 0;
+}

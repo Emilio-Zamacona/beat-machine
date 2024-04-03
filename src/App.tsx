@@ -8,7 +8,11 @@ function App() {
   const [track, setTrack] = useState<number | undefined>(0);
 
   const { store, dispatch } = useStore();
-  const { rows, play, time } = store;
+  const { rows, play, bpm } = store;
+
+  const time = () => {
+    return Math.round(15000 / bpm);
+  };
 
   const goToNextBeat = () => {
     if (!play) {
@@ -17,10 +21,12 @@ function App() {
       return;
     }
     clearInterval(track);
+    console.warn(time());
     setTrack(
       setInterval(() => {
         dispatch({ type: "CURRENT" });
-      }, time)
+        console.warn("wawwwwww", time());
+      }, time())
     );
   };
 
@@ -37,10 +43,11 @@ function App() {
   }, [play]);
 
   useEffect(() => {
+    console.warn("aaaaaaaaaaaaa");
     clearInterval(track);
     setTrack(0);
     goToNextBeat();
-  }, [time]);
+  }, [time()]);
 
   useEffect(() => {
     dispatch({ type: "RESETGRID" });

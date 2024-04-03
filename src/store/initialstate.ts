@@ -8,7 +8,7 @@ const initialState = {
   },
   play: false,
   current: -1,
-  time: 175,
+  bpm: 70,
   beats: beats,
   sounds: null,
   rows: themes[0].sounds.map(

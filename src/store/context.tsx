@@ -31,10 +31,10 @@ const storeReducer = (state, action) => {
         sounds: action.value,
       };
     }
-    case "TIME": {
+    case "BPM": {
       return {
         ...state,
-        time: action.value,
+        bpm: action.value,
       };
     }
     case "BEATS": {

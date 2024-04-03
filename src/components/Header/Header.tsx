@@ -14,17 +14,17 @@ const Header = () => {
           dispatch({ type: "PLAY", value: !play });
         }}
       >
-        play
+        {play ? "STOP" : "PLAY"}
       </button>
       <button
         className="header__button"
         onClick={() => dispatch({ type: "RESETGRID" })}
       >
-        clear grid
+        CLEAR
       </button>
-      <ThemeSwitcher />
       <BeatInput />
       <BpmInput />
+      <ThemeSwitcher />
     </div>
   );
 };

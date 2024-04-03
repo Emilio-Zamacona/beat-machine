@@ -1,6 +1,25 @@
 .header{
+    display: flex;
+    input[type="range"]{
+        color: red;
+    }
     &__button{
-        padding:20px
+        padding:20px;
+        background-color: $empty;
+        color: $filled;
+        border: none;
+        width: 100px;
+        margin: 20px 0;
+        &:active{
+            background-color: $filled;
+            color: $empty;
+        }
+    }
+    .theme-switcher{
+        display: flex;
+        &__list{
+            display: flex;
+        }
     }
     
 }
