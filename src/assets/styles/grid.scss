@@ -5,21 +5,27 @@
     &__row{
         display: flex;
         gap: $square-gap;
+        width: 100%;
         &__label{
-            width: 50px;
+            width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $background;
+            color: $empty;
+            border-bottom: 1px solid $empty;
         }
         &__square{
             border: 1px solid $border;
             background-color: $empty;
-            width: 70px;
             aspect-ratio: 1;
+            width: 100%;
             &.--filled{
              background-color: $filled;   
             }
             &.--current{
-                border-left: 3px solid $progress;
-                border-right: 3px solid $progress;
-            }
+                border: 1px solid $progress;
+            } 
         }
     }
 

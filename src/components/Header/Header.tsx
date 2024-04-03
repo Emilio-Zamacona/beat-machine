@@ -10,21 +10,21 @@ const Header = () => {
     <div className="header">
       <button
         className="header__button"
+        onClick={() => dispatch({ type: "RESETGRID" })}
+      >
+        CLEAR
+      </button>
+      <button
+        className="header__button"
         onClick={() => {
           dispatch({ type: "PLAY", value: !play });
         }}
       >
         {play ? "STOP" : "PLAY"}
       </button>
-      <button
-        className="header__button"
-        onClick={() => dispatch({ type: "RESETGRID" })}
-      >
-        CLEAR
-      </button>
-      <BeatInput />
-      <BpmInput />
       <ThemeSwitcher />
+      <BpmInput />
+      <BeatInput />
     </div>
   );
 };

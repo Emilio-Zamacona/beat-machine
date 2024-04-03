@@ -13,7 +13,7 @@ const BpmInput = () => {
     });
   };
   return (
-    <div>
+    <div className="header__element">
       <span>BPM: {bpm}</span>
       <input
         onChange={onInputChange}

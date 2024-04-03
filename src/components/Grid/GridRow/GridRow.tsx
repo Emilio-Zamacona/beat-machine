@@ -9,7 +9,7 @@ interface IGridRow extends IRow {
 const GridRow = ({ name, squares, rowIndex, onUpdateRow }: IGridRow) => {
   return (
     <div className="grid__row">
-      <div className="grid__row__label">{name}</div>
+      {/* <div className="grid__row__label">{name.toUpperCase()}</div> */}
       {squares.map((square, i) => (
         <GridSquare
           key={i}
