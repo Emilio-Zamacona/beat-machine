@@ -3,10 +3,13 @@
 @import './grid.scss';
 @import './header.scss';
 
-body{
-    background-color: $background;
+body {
+  background-color: $background;
 }
-ul{
-    list-style: none;
-    padding: 0;
+ul {
+  list-style: none;
+  padding: 0;
+}
+#root {
+  height: 100vh;
 }

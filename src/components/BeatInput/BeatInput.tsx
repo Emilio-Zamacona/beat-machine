@@ -1,10 +1,17 @@
-import { useStore } from "../../store/hooks";
+import { useStore } from '../../store/hooks';
+import { beatLengths } from '../../constants/config';
 
 const BeatInput = () => {
   const { dispatch } = useStore();
-  const onChangeBeatQty = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: "BEATS", value: e.target.value });
+  const onChangeBeatQty = (num: number) => {
+    dispatch({ type: 'BEATS', value: num });
   };
-  return <input onChange={onChangeBeatQty} type="number" />;
+  return (
+    <div className="header__element">
+      {beatLengths.map((num) => (
+        <button onClick={() => onChangeBeatQty(num)}>{num}</button>
+      ))}
+    </div>
+  );
 };
 export default BeatInput;
