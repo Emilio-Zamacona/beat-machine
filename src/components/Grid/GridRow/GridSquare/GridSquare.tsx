@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { useStore } from '../../../../store/hooks';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useStore } from "../../../../store/hooks";
+import { IColor } from "../../../../types";
 
 interface IGridSquare {
   square: number;
@@ -10,7 +11,12 @@ interface IGridSquare {
   onUpdateSquare: () => void;
 }
 
-const GridSquare = ({ square, rowIndex, squareIndex, onUpdateSquare }: IGridSquare) => {
+const GridSquare = ({
+  square,
+  rowIndex,
+  squareIndex,
+  onUpdateSquare,
+}: IGridSquare) => {
   const squareRef = useRef<HTMLLIElement>(null);
   const { store } = useStore();
   const { theme, current } = store;
@@ -21,44 +27,87 @@ const GridSquare = ({ square, rowIndex, squareIndex, onUpdateSquare }: IGridSqua
   const onPlay = contextSafe(() => {
     if (square && isCurrent()) {
       const tl = gsap.timeline().to(squareRef.current, {
-        scale: 1.4,
+        scale: 1.1,
         backgroundColor: theme.sounds[rowIndex].color || theme.colors[0].value,
-        borderRadius: '50%',
-        boxShadow: '0px 0px 10px black',
+        boxShadow: `0px 0px 15px ${
+          theme.colors.find((e: IColor) => e.name === "progress").value
+        }`,
+        rotate: "10deg",
         duration: 0.3,
         onComplete: () => {
           tl.reverse();
         },
         onReverseComplete: () => {
-          gsap.set(squareRef.current, { clearProps: 'all' });
+          gsap.set(squareRef.current, { clearProps: "all" });
         },
       });
+      gsap
+        .timeline()
+        .to(squareRef.current, {
+          borderRadius: "10%",
+          rotate: "5deg",
+          duration: 0.1,
+        })
+        .to(squareRef.current, {
+          rotate: "-5deg",
+          duration: 0.1,
+        })
+        .to(squareRef.current, {
+          rotate: "0deg",
+          duration: 0.1,
+        });
     }
   });
+  const onSquareHover = (hover: boolean) =>
+    contextSafe(() => {
+      if (hover) {
+        gsap.timeline().to(".gradient", {
+          backgroundColor: "rgba(255,255,255,0.3)",
+          duration: 0.2,
+        });
+        console.warn("hover");
+      } else {
+        gsap.timeline().to(".gradient", {
+          backgroundColor: "rgba(255,255,255,0)",
+          duration: 0.2,
+
+          onComplete: () => {
+            gsap.set(".gradient", { clearProps: "all" });
+          },
+        });
+      }
+    })();
+
   const onSquareChecked = contextSafe(() => {
-    const tl = gsap
-      .timeline()
-      .from('gradient', {
-        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 0%)',
-        duration: 1,
-      })
-      .to('.gradient', {
-        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 10%)',
-        /* backgroundColor: 'red', */
-        onComplete: () => {
-          console.warn('check');
-          /* tl.reverse(); */
-        },
-        onReverseComplete: () => {
-          gsap.set('.gradient', { clearProps: 'all' });
-        },
-      });
+    if (!square) {
+      gsap
+        .timeline()
+        .from(".gradient", {
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 0%)",
+          duration: 0.5,
+        })
+        .to(".gradient", {
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,255,255,0) 25%, rgba(0,0,0,0) 50%)",
+          onReverseComplete: () => {
+            gsap.set(".gradient", { clearProps: "all" });
+          },
+        });
+    }
   });
   useEffect(() => {
     onPlay();
   }, [square, isCurrent()]);
   return (
-    <li ref={squareRef} className={`grid__row__square ${square && '--filled'} ${isCurrent() && '--current'}`}>
+    <li
+      ref={squareRef}
+      className={`grid__row__square ${square && "--filled"} ${
+        isCurrent() && "--current"
+      }`}
+      onMouseEnter={() => onSquareHover(true)}
+      onMouseLeave={() => onSquareHover(false)}
+    >
       <div
         className="button"
         onMouseDown={() => {
