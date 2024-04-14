@@ -17,13 +17,12 @@ const ThemeSwitcher = () => {
     });
   }, [theme]);
   return (
-    <div className="header__element">
-      <p>THEMES</p>
+    <div className="theme-switcher__wrapper">
       <ul className="theme-switcher__list">
         {themes.map((theme, i) => (
           <li key={theme.name}>
             <button
-              className="header__button"
+              className="main-btn"
               onClick={() => {
                 dispatch({ type: "THEME", value: i });
               }}

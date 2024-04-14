@@ -3,6 +3,7 @@ import Grid from "./components/Grid/Grid";
 import Sounds from "./components/Sounds/Sounds";
 import { useStore } from "./store/hooks";
 import Header from "./components/Header/Header";
+import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
 
 function App() {
   const [track, setTrack] = useState<number | undefined>(0);
@@ -54,9 +55,10 @@ function App() {
   }, []);
   return (
     <>
-      <Header />
       <Sounds />
       {rows && <Grid />}
+      <Header />
+      <ThemeSwitcher />
     </>
   );
 }

@@ -1,31 +1,22 @@
 .header{
     display: flex;
     justify-content: space-between;
-    input[type="range"]{
-        color: red;
-    }
-    &__button{
-        padding:20px;
-        background-color: $empty;
-        border: none;
-        border-radius: 4px;
-        border: 1px solid $border;
-        color: $filled;
-        width: 100px;
-        margin: 20px 0;
-        font-weight: 600;
-        text-transform: uppercase;
-        &:active{
-            background-color: $filled;
-            color: $empty;
-        }
-    }
+    margin-top: 10px;
+    padding: 20px;
+    background-color: $empty;
+    border-radius: 12px;
+
     &__element{
         display: flex;
         align-items: center;
-        .theme-switcher__list{
-            display: flex;
+        gap: 20px;
+        span{
+            white-space: pre;
         }
+    }
+    &__left{
+        display: flex;
+        gap: 40px;
     }
     
 }

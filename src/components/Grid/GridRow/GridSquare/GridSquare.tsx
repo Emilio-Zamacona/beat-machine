@@ -44,7 +44,6 @@ const GridSquare = ({
       gsap
         .timeline()
         .to(squareRef.current, {
-          borderRadius: "10%",
           rotate: "5deg",
           duration: 0.1,
         })

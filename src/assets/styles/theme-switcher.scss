@@ -1,0 +1,9 @@
+.theme-switcher{
+    &__wrapper{
+        display: flex;
+        justify-content: center;
+    }
+    &__list{
+        display: flex;
+    }
+}

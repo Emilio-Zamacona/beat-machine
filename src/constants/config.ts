@@ -1,6 +1,6 @@
 export const minBpm = 50;
 export const maxBpm = 200;
-export const beatLengths = [16, 32, 64];
+export const beatLengths = [16, 32];
 export const themes = [
   {
     name: "digital",

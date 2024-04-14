@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { minBpm, maxBpm } from '../../constants/config';
-import { useStore } from '../../store/hooks';
+import { useState } from "react";
+import { minBpm, maxBpm } from "../../constants/config";
+import { useStore } from "../../store/hooks";
 
 const BpmInput = () => {
   const { dispatch } = useStore();
@@ -10,14 +10,20 @@ const BpmInput = () => {
   };
   const onMouseUp = () => {
     dispatch({
-      type: 'BPM',
+      type: "BPM",
       value: bpm,
     });
   };
   return (
     <div className="header__element">
-      <span>BPM: {bpm}</span>
-      <input onChange={onInputChange} onMouseUp={onMouseUp} value={bpm} type="range" min={minBpm} max={maxBpm} />
+      <input
+        onChange={onInputChange}
+        onMouseUp={onMouseUp}
+        value={bpm}
+        type="range"
+        min={minBpm}
+        max={maxBpm}
+      />
     </div>
   );
 };

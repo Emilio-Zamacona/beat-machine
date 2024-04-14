@@ -1,3 +1,4 @@
+$watch-path: url("data:image/svg+xml,%3Csvg width='800px' height='800px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3H14M12 9V13L14 15M20 13C20 17.4183 16.4183 21 12 21C7.58172 21 4 17.4183 4 13C4 8.58172 7.58172 5 12 5C16.4183 5 20 8.58172 20 13Z' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 input[type=range] {
   height: 27px;
   -webkit-appearance: none;
@@ -14,23 +15,25 @@ input[type=range]::-webkit-slider-runnable-track {
   cursor: pointer;
   animate: 0.2s;
   box-shadow: 0px 0px 0px $empty;
-  background: $empty;
+  background: color-mix(in srgb,$filled,#000 35%);
   border-radius: 25px;
   border: 0px solid #000101;
 }
 input[type=range]::-webkit-slider-thumb {
   box-shadow: 0px 0px 0px $empty;
   border: 1px solid $empty;
-  height: 21px;
-  width: 37px;
-  border-radius: 7px;
-  background: $filled;
+  background-image: $watch-path;
+  background-size: cover;
+  height: 38px;
+  width: 38px;
+  border-radius: 5px;
+  background-color: $filled;
+  margin-top: -13px;
   cursor: pointer;
   -webkit-appearance: none;
-  margin-top: -4px;
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: $empty;
+  background: color-mix(in srgb,$filled,#000 35%);
 }
 input[type=range]::-moz-range-track {
   width: 100%;
@@ -44,11 +47,14 @@ input[type=range]::-moz-range-track {
 }
 input[type=range]::-moz-range-thumb {
   box-shadow: 0px 0px 0px $filled;
-  border: 0px solid $filled;
-  height: 21px;
-  width: 37px;
-  border-radius: 7px;
-  background: $filled;
+  border: 1px solid $filled;
+  background-image: $watch-path;
+  background-size: cover;
+  height: 38px;
+  width: 38px;
+  border-radius: 5px;
+  background-color: $filled;
+  margin-top: -13px;
   cursor: pointer;
 }
 input[type=range]::-ms-track {
@@ -74,12 +80,14 @@ input[type=range]::-ms-fill-upper {
 }
 input[type=range]::-ms-thumb {
   margin-top: 1px;
-  box-shadow: 0px 0px 0px $filled;
-  border: 0px solid $filled;
-  height: 21px;
-  width: 37px;
-  border-radius: 7px;
-  background: $filled;
+  border: 1px solid $filled;
+  background-image: $watch-path;
+  background-size: cover;
+  height: 38px;
+  width: 38px;
+  border-radius: 5px;
+  background-color: $filled;
+  margin-top: -13px;
   cursor: pointer;
 }
 input[type=range]:focus::-ms-fill-lower {
