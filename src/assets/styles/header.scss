@@ -20,3 +20,20 @@
     }
     
 }
+.clear-section{
+    &__modal{
+        background-color: $background;
+        & &__ok{
+            background-color: $filled;
+            color: $empty;
+            &:hover{
+                background-color: $empty;
+                color: $filled;
+            }
+        }
+        & &__cancel{
+            background-color: $empty;
+            color: $filled;
+        }
+    }
+}

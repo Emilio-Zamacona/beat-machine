@@ -2,12 +2,8 @@ import { useStore } from "../../store/hooks";
 import BeatInput from "../BeatInput/BeatInput";
 import BpmInput from "../BpmInput/BpmInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlay,
-  faPause,
-  faTrash,
-  faGear,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faPause, faGear } from "@fortawesome/free-solid-svg-icons";
+import Clear from "../Clear/Clear";
 
 const Header = () => {
   const { store, dispatch } = useStore();
@@ -27,15 +23,10 @@ const Header = () => {
             <FontAwesomeIcon icon={faPlay} />
           )}
         </button>
+        <Clear />
         <BpmInput />
         <BeatInput />
       </div>
-      <button
-        className="main-btn"
-        onClick={() => dispatch({ type: "RESETGRID" })}
-      >
-        <FontAwesomeIcon icon={faTrash} />
-      </button>
       <button className="main-btn">
         <FontAwesomeIcon icon={faGear} />
       </button>
