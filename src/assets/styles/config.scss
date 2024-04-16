@@ -1,0 +1,17 @@
+.config{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    &__label{
+        line-height: 2;
+        width: 100px;
+        color: $empty;
+    }
+    &__action{
+        display: flex;
+        gap: 15px;
+    }
+}
+.config-wrapper{
+    background-color: $background;
+}
