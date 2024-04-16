@@ -7,12 +7,19 @@ const BeatInput = () => {
     dispatch({ type: "BEATS", value: num });
   };
   return (
-    <div className="header__element">
-      {beatLengths.map((num) => (
-        <button className="main-btn" onClick={() => onChangeBeatQty(num)}>
-          {num}
-        </button>
-      ))}
+    <div className="config">
+      <p className="config__label">Beat amount:</p>
+      <div className="config__action">
+        {beatLengths.map((num) => (
+          <button
+            key={num}
+            className="main-btn"
+            onClick={() => onChangeBeatQty(num)}
+          >
+            {num}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

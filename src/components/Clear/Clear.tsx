@@ -6,7 +6,6 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
@@ -19,9 +18,7 @@ const Clear = () => {
     <div className="clear-section">
       <AlertDialog>
         <AlertDialogTrigger>
-          <button className="main-btn">
-            <FontAwesomeIcon icon={faTrash} />
-          </button>
+          <FontAwesomeIcon icon={faTrash} />
         </AlertDialogTrigger>
         <AlertDialogContent className="w-80 clear-section__modal">
           <AlertDialogHeader>

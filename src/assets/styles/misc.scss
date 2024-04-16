@@ -1,7 +1,11 @@
 button{
+    &:has(svg){
+        font-size: 35px;
+    }
     cursor: pointer;
-    &.main-btn{
-        padding: 5px;
+    &[class*="-btn"]{
+        min-width: 50px;
+        padding: 10px 20px;
         background-color: $empty;
         border: none;
         border-radius: 4px;
@@ -12,8 +16,21 @@ button{
             background-color: $filled;
             color: $empty;
         }
-        &:has(svg){
-            font-size: 35px;
+        &[class*="main"]{
+            background-color: $empty;
+            color: $filled;
+            &:active{
+                background-color: $filled;
+                color: $empty;
+            }
+        }
+        &[class*="variant"]{
+            background-color: $filled;
+            color: $empty;
+            &:active{
+                background-color: $empty;
+                color: $filled;
+            }
         }
     }
 }

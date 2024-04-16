@@ -2,26 +2,27 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import BeatInput from "../BeatInput/BeatInput";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 const Config = () => {
   return (
     <Drawer>
-      <DrawerTrigger>Open</DrawerTrigger>
-      <DrawerContent>
+      <DrawerTrigger>
+        <FontAwesomeIcon icon={faGear} />
+      </DrawerTrigger>
+      <DrawerContent className="config-wrapper">
         <DrawerHeader>
-          <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-          <DrawerDescription>This action cannot be undone.</DrawerDescription>
+          <BeatInput />
+          <ThemeSwitcher />
         </DrawerHeader>
-        <DrawerFooter>
-          <DrawerClose>
-            <Button>ok</Button>
-          </DrawerClose>
+        <DrawerFooter className="flex-row justify-center">
+          <DrawerClose className="variant-btn">Ok</DrawerClose>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

@@ -1,8 +1,7 @@
 import { useStore } from "../../store/hooks";
-import BeatInput from "../BeatInput/BeatInput";
 import BpmInput from "../BpmInput/BpmInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faPause, faGear } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 import Clear from "../Clear/Clear";
 import Config from "../Config/Config";
 
@@ -14,7 +13,6 @@ const Header = () => {
       <div className="header">
         <div className="header__left">
           <button
-            className="main-btn"
             onClick={() => {
               dispatch({ type: "PLAY", value: !play });
             }}
@@ -27,13 +25,9 @@ const Header = () => {
           </button>
           <Clear />
           <BpmInput />
-          <BeatInput />
         </div>
-        <button className="main-btn">
-          <FontAwesomeIcon icon={faGear} />
-        </button>
+        <Config />
       </div>
-      <Config />
     </>
   );
 };
