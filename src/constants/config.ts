@@ -58,11 +58,11 @@ export const themes = [
       { name: "shaker2", color: "red" },
     ],
     colors: [
-      { name: "filled", value: "#5f2301" },
-      { name: "empty", value: "#ffddca" },
+      { name: "filled", value: "#BFD34A" },
+      { name: "empty", value: "#1E2108" },
       { name: "border", value: "#00000055" },
-      { name: "background", value: "#ffffff" },
-      { name: "progress", value: "#BF4E30" },
+      { name: "background", value: "#F4D8CD" },
+      { name: "progress", value: "#A4515F" },
     ],
   },
 ];
