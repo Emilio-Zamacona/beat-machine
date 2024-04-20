@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 const Clear = () => {
-  const { store, dispatch } = useStore();
+  const { dispatch } = useStore();
   return (
     <div className="clear-section">
       <AlertDialog>

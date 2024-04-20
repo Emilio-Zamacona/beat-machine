@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useReducer } from "react";
 import { themes } from "../constants/config";
 import initialState from "./initialstate";
@@ -8,7 +9,13 @@ const StoreContext = createContext<{
   dispatch: React.Dispatch<any>;
 }>({ store: initialState, dispatch: () => null });
 
-const storeReducer = (state, action) => {
+const storeReducer = (
+  state: typeof initialState,
+  action: {
+    type: any;
+    value: any;
+  }
+) => {
   const resetGrid = (sounds: ISound[]) => {
     return sounds.map((sound: ISound) => {
       return {
@@ -42,16 +49,16 @@ const storeReducer = (state, action) => {
         ...state,
         beats: action.value,
         rows: state.rows?.map((row: IRow) => {
-          if (row.squares.length > action.value) {
+          if (action && row.squares.length > (action?.value ?? 0)) {
             return {
               ...row,
               squares: row.squares.splice(0, action.value),
             };
-          } else if (row.squares.length < action.value) {
+          } else if (row.squares.length < (action?.value ?? 0)) {
             return {
               ...row,
               squares: row.squares.concat(
-                [...Array(action.value)].map(() => 0)
+                [...Array(action?.value ?? 0)].map(() => 0)
               ),
             };
           }
@@ -60,17 +67,20 @@ const storeReducer = (state, action) => {
       };
     }
     case "THEME": {
-      return {
-        ...state,
-        theme: {
-          name: themes[action.value].name,
-          sounds: themes[action.value].sounds,
-          colors: themes[action.value].colors,
-        },
-        rows: resetGrid(themes[action.value].sounds),
-        play: false,
-        current: -1,
-      };
+      if (action.value !== undefined) {
+        return {
+          ...state,
+          theme: {
+            name: themes[action.value].name,
+            sounds: themes[action.value].sounds,
+            colors: themes[action.value].colors,
+          },
+          rows: resetGrid(themes[action.value].sounds),
+          play: false,
+          current: -1,
+        };
+      }
+      return state;
     }
     case "RESETGRID": {
       return {
@@ -80,8 +90,8 @@ const storeReducer = (state, action) => {
     }
     case "UPDATEGRID": {
       const newRows = [...state.rows];
-      newRows[action.value.row].squares[action.value.square] =
-        newRows[action.value.row].squares[action.value.square] > 0 ? 0 : 1;
+      newRows[action.value?.row].squares[action.value?.square] =
+        newRows[action.value?.row].squares[action.value?.square] > 0 ? 0 : 1;
       return {
         ...state,
         rows: newRows,
@@ -97,8 +107,13 @@ const storeReducer = (state, action) => {
   }
 };
 
-const StoreProvider: React.FC = ({ children }) => {
-  const [store, dispatch] = useReducer(storeReducer, initialState);
+const StoreProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [store, dispatch] = useReducer<React.Reducer<any, any>>(
+    storeReducer,
+    initialState
+  );
 
   return (
     <StoreContext.Provider value={{ store, dispatch }}>

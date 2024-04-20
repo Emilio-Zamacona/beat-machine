@@ -6,7 +6,9 @@ import Header from "./components/Header/Header";
 import { IColor } from "./types";
 
 function App() {
-  const [track, setTrack] = useState<number | undefined>(0);
+  const [track, setTrack] = useState<NodeJS.Timeout | undefined | number>(
+    undefined
+  );
 
   const { store, dispatch } = useStore();
   const { rows, play, bpm, theme } = store;

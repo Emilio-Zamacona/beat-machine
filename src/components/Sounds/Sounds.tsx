@@ -6,6 +6,7 @@ const Sounds = () => {
   const {
     store: { theme, current, rows },
   } = useStore();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const audioRefs = useRef<any>(null);
   const loadAudio = () => {
     audioRefs.current = theme.sounds.map(
