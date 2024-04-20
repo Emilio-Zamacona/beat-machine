@@ -58,7 +58,7 @@ const storeReducer = (
             return {
               ...row,
               squares: row.squares.concat(
-                [...Array(action?.value ?? 0)].map(() => 0)
+                [...Array(action?.value - row.squares.length ?? 0)].map(() => 0)
               ),
             };
           }
