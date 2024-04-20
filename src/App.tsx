@@ -24,7 +24,6 @@ function App() {
       return;
     }
     clearInterval(track);
-    console.warn(time());
     setTrack(
       setInterval(() => {
         dispatch({ type: "CURRENT" });

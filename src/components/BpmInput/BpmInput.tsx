@@ -19,6 +19,7 @@ const BpmInput = () => {
       <input
         onChange={onInputChange}
         onMouseUp={onMouseUp}
+        onTouchEnd={onMouseUp}
         value={bpm}
         type="range"
         min={minBpm}
