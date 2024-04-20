@@ -59,6 +59,10 @@ function App() {
       document.documentElement.style.setProperty(key1, value1);
     });
   }, [theme]);
+
+  useEffect(() => {
+    dispatch({ type: "SIZE", value: 80 / rows.length });
+  }, [theme, rows]);
   return (
     <>
       <Sounds />

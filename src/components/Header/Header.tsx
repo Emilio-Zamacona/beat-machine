@@ -8,10 +8,17 @@ import About from "../About/About";
 
 const Header = () => {
   const { store, dispatch } = useStore();
-  const { play } = store;
+  const { play, size, rows } = store;
   return (
     <>
-      <div className="header">
+      <div
+        className="header"
+        style={{
+          maxWidth: `calc(${size * rows[0].squares.length}vh + ${
+            rows[0].squares.length * 2
+          }px)`,
+        }}
+      >
         <div className="header__left">
           <button
             onClick={() => {

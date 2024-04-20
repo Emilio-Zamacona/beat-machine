@@ -19,7 +19,7 @@ const GridSquare = ({
 }: IGridSquare) => {
   const squareRef = useRef<HTMLLIElement>(null);
   const { store } = useStore();
-  const { theme, current } = store;
+  const { theme, current, size } = store;
   const isCurrent = () => {
     return current === squareIndex;
   };
@@ -38,7 +38,9 @@ const GridSquare = ({
           tl.reverse();
         },
         onReverseComplete: () => {
-          gsap.set(squareRef.current, { clearProps: "all" });
+          gsap.set(squareRef.current, {
+            clearProps: "backgroundColor",
+          });
         },
       });
       gsap
@@ -70,7 +72,9 @@ const GridSquare = ({
           duration: 0.2,
 
           onComplete: () => {
-            gsap.set(".gradient", { clearProps: "all" });
+            gsap.set(".gradient", {
+              clearProps: "backgroundColor",
+            });
           },
         });
       }
@@ -89,7 +93,9 @@ const GridSquare = ({
           backgroundImage:
             "radial-gradient(circle, rgba(255,255,255,0) 25%, rgba(0,0,0,0) 50%)",
           onReverseComplete: () => {
-            gsap.set(".gradient", { clearProps: "all" });
+            gsap.set(".gradient", {
+              clearProps: "backgroundImage",
+            });
           },
         });
     }
@@ -103,6 +109,7 @@ const GridSquare = ({
       className={`grid__row__square ${square && "--filled"} ${
         isCurrent() && "--current"
       }`}
+      style={{ maxWidth: `${size}vh` }}
       onMouseEnter={() => onSquareHover(true)}
       onMouseLeave={() => onSquareHover(false)}
     >

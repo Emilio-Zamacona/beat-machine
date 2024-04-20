@@ -104,6 +104,12 @@ const storeReducer = (
         current: -1,
       };
     }
+    case "SIZE": {
+      return {
+        ...state,
+        size: action.value,
+      };
+    }
   }
 };
 

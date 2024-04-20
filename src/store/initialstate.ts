@@ -11,6 +11,7 @@ const initialState = {
   bpm: 70,
   beats: beats,
   sounds: null,
+  size: 0,
   rows: themes[0].sounds.map(
     (sound: { name: string; color: string | boolean }) => {
       return {
