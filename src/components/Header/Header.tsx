@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 import Clear from "../Clear/Clear";
 import Config from "../Config/Config";
+import About from "../About/About";
 
 const Header = () => {
   const { store, dispatch } = useStore();
@@ -26,7 +27,10 @@ const Header = () => {
           <Clear />
           <BpmInput />
         </div>
-        <Config />
+        <div className="flex gap-8">
+          <Config />
+          <About />
+        </div>
       </div>
     </>
   );
