@@ -64,7 +64,6 @@ const GridSquare = ({
           backgroundColor: "rgba(255,255,255,0.3)",
           duration: 0.2,
         });
-        console.warn("hover");
       } else {
         gsap.timeline().to(".gradient", {
           backgroundColor: "rgba(255,255,255,0)",

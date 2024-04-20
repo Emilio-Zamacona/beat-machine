@@ -10,8 +10,7 @@ const Sounds = () => {
   const audioRefs = useRef<any>(null);
   const loadAudio = () => {
     audioRefs.current = theme.sounds.map(
-      (sound: ISound) =>
-        new Audio(`src/assets/sounds/${theme.name}/${sound.name}.mp3`)
+      (sound: ISound) => new Audio(`sounds/${theme.name}/${sound.name}.mp3`)
     );
   };
   if (!audioRefs.current) {
